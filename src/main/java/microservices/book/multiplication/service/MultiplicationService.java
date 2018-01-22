@@ -11,5 +11,12 @@ public interface MultiplicationService {
      * @return a Multiplication object with random factors
      */
 	Multiplication createRandomMultiplication();
+	
+	/**
+	 * 
+	 * @param resultAttempt
+	 * @return true if the attempt matches the result of the multiplication, false otherwise
+	 */
+	boolean checkAttempt(final MultiplicationResultAttempt resultAttempt);
 
 }
