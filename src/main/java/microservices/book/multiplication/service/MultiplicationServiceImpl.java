@@ -21,5 +21,10 @@ public class MultiplicationServiceImpl implements MultiplicationService {
 		int factorB = randomGeneratorService.generateRandomFactor();
 		return new Multiplication(factorA, factorB);
 	}
+	
+	@Override
+	public boolean checkAttempt(final MultiplicationResultAttempt resultAttempt){
+		return false;
+	}
 
 }
