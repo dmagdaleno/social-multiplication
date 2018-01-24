@@ -20,7 +20,7 @@ public class MultiplicationServiceImplTest {
 	private MultiplicationService multiplicationService;
 	
 	@Before
-	public void setUp() {
+	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		multiplicationService = new MultiplicationServiceImpl(randomGeneratorService);
 	}

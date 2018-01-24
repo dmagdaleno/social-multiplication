@@ -4,6 +4,10 @@ public final class MultiplicationResultAttempt {
 	private final User user;
 	private final Multiplication multiplication;
 	private final int resultAttempt;
+	
+	public MultiplicationResultAttempt() {
+		this(null, null, -1);
+	}
 
 	public MultiplicationResultAttempt(final User user, final Multiplication multiplication, final int resultAttempt) {
 		this.user = user;

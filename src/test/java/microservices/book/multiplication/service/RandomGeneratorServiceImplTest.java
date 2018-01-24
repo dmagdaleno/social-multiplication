@@ -16,7 +16,7 @@ public class RandomGeneratorServiceImplTest {
 	private RandomGeneratorService randomGeneratorService;
 	
 	@Before
-	public void setUp() {
+	public void setup() {
 		randomGeneratorService = new RandomGeneratorServiceImpl();
 	}
 	

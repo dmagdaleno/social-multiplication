@@ -3,6 +3,10 @@ package microservices.book.multiplication.domain;
 public final class User {
 	
 	private String alias;
+	
+	public User() {
+		this(null);
+	}
 
 	public User(final String alias) {
 		this.alias = alias;

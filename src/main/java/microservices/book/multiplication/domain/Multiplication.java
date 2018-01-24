@@ -4,6 +4,10 @@ public final class Multiplication {
 	private final int factorA;
 	private final int factorB;
 	private final int result;
+	
+	public Multiplication() {
+		this(0, 0);
+	}
 
 	public Multiplication(final int factorA, final int factorB) {
 		this.factorA = factorA;
@@ -20,7 +24,7 @@ public final class Multiplication {
 	}
 	
 	public int getResult(){
-		return factorA * factorB;
+		return result;
 	}
 	
 	@Override
