@@ -24,7 +24,7 @@ public final class Multiplication {
 	}
 	
 	public int getResult(){
-		return result;
+		return factorA * factorB;
 	}
 	
 	@Override
