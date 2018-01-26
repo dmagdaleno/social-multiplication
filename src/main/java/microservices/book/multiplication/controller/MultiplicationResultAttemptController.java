@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import microservices.book.multiplication.domain.MultiplicationResultAttempt;
-import microservices.book.multiplication.domain.ResultResponse;
 import microservices.book.multiplication.service.MultiplicationService;
 
 @RestController
@@ -22,7 +21,7 @@ public class MultiplicationResultAttemptController {
 	}
 	
 	@PostMapping
-	ResponseEntity<ResultResponse> postResult(@RequestBody MultiplicationResultAttempt resultAttempt) {
-	    return ResponseEntity.ok(new ResultResponse(multiplicationService.checkAttempt(resultAttempt)));
+	ResponseEntity<MultiplicationResultAttempt> postResult(@RequestBody MultiplicationResultAttempt resultAttempt) {
+	    return ResponseEntity.ok(multiplicationService.checkAttempt(resultAttempt));
 	}
 }

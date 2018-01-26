@@ -23,7 +23,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import microservices.book.multiplication.domain.Multiplication;
 import microservices.book.multiplication.domain.MultiplicationResultAttempt;
 import microservices.book.multiplication.domain.User;
-import microservices.book.multiplication.domain.ResultResponse;
 import microservices.book.multiplication.service.MultiplicationService;
 
 @RunWith(SpringRunner.class)
@@ -37,7 +36,7 @@ public class MultiplicationResultAttemptControllerTest {
 	private MockMvc mvc;
 	
 	private JacksonTester<MultiplicationResultAttempt> jsonResult;
-	private JacksonTester<ResultResponse> jsonResponse;
+	private JacksonTester<MultiplicationResultAttempt> jsonResponse;
 	
 	@Before
 	public void setup() {
@@ -56,10 +55,11 @@ public class MultiplicationResultAttemptControllerTest {
 
 	private void genericParameterizedTest(final boolean correct) throws Exception {
 		// given
-		given(multiplicationService.checkAttempt(any(MultiplicationResultAttempt.class))).willReturn(correct);
 		User user = new User("john");
 		Multiplication multiplication = new Multiplication(50, 70);
-		MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3500);
+		MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3500, false);
+		MultiplicationResultAttempt returnedAttempt = new MultiplicationResultAttempt(user, multiplication, 3500, correct);
+		given(multiplicationService.checkAttempt(any(MultiplicationResultAttempt.class))).willReturn(returnedAttempt);
 		
 		// when
 		MockHttpServletResponse response = mvc.perform(post("/results").contentType(MediaType.APPLICATION_JSON)
@@ -67,6 +67,6 @@ public class MultiplicationResultAttemptControllerTest {
 		
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-		assertThat(response.getContentAsString()).isEqualTo(jsonResponse.write(new ResultResponse(correct)).getJson());
+		assertThat(response.getContentAsString()).isEqualTo(jsonResponse.write(returnedAttempt).getJson());
 	}
 }

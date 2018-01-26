@@ -31,4 +31,33 @@ public final class Multiplication {
 	public String toString() {
 		return String.format("Multiplication: %d X %d = %d", factorA, factorB, result);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + factorA;
+		result = prime * result + factorB;
+		result = prime * result + this.result;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Multiplication other = (Multiplication) obj;
+		if (factorA != other.factorA)
+			return false;
+		if (factorB != other.factorB)
+			return false;
+		if (result != other.result)
+			return false;
+		return true;
+	}
+	
 }

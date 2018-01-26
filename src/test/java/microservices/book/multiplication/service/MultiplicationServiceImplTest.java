@@ -30,13 +30,13 @@ public class MultiplicationServiceImplTest {
 		// Given
 		Multiplication multiplication = new Multiplication(50, 60);
 		User user = new User("john_doe");
-		MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3000);
+		MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3000, false);
 		
 		// When
-		boolean checkAttempt = multiplicationService.checkAttempt(attempt);
+		MultiplicationResultAttempt checkedAttempt = multiplicationService.checkAttempt(attempt);
 		
 		// Then
-		assertThat(checkAttempt).isTrue();
+		assertThat(checkedAttempt.isCorrect()).isTrue();
 	}
 	
 	@Test
@@ -44,13 +44,28 @@ public class MultiplicationServiceImplTest {
 		// Given
 		Multiplication multiplication = new Multiplication(50, 60);
 		User user = new User("john_doe");
-		MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3001);
+		MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3001, false);
 		
 		// When
-		boolean checkAttempt = multiplicationService.checkAttempt(attempt);
+		MultiplicationResultAttempt checkedAttempt = multiplicationService.checkAttempt(attempt);
 		
 		// Then
-		assertThat(checkAttempt).isFalse();
+		assertThat(checkedAttempt.isCorrect()).isFalse();
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void shouldThrowAnExceptionForCheaters() {
+		// Given
+		Multiplication multiplication = new Multiplication(50, 60);
+		User user = new User("john_doe");
+		MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3001, true);
+		
+		// When
+		MultiplicationResultAttempt checkedAttempt = multiplicationService.checkAttempt(attempt);
+		
+		// Then
+		System.out.println("Never gets here");
+		assertThat(checkedAttempt.isCorrect()).isFalse();
 	}
 	
 	@Test
