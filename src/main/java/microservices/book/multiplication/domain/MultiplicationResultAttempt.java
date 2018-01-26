@@ -1,8 +1,26 @@
 package microservices.book.multiplication.domain;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public final class MultiplicationResultAttempt {
-	private final User user;
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="MULTIPLICATION_ID")
 	private final Multiplication multiplication;
+	
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="USER_ID")
+	private final User user;
+	
 	private final int resultAttempt;
 	private final boolean correct;
 	

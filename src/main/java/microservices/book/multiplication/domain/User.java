@@ -1,6 +1,17 @@
 package microservices.book.multiplication.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public final class User {
+	
+	@Id
+	@GeneratedValue
+	@Column(name="USER_ID")
+	private Long id;
 	
 	private String alias;
 	

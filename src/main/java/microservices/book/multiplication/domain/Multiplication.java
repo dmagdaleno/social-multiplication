@@ -1,9 +1,19 @@
 package microservices.book.multiplication.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public final class Multiplication {
+	@Id
+	@GeneratedValue
+	@Column(name="MULTIPLICATION_ID")
+	private Long id;
+	
 	private final int factorA;
 	private final int factorB;
-	private final int result;
 	
 	public Multiplication() {
 		this(0, 0);
@@ -12,7 +22,6 @@ public final class Multiplication {
 	public Multiplication(final int factorA, final int factorB) {
 		this.factorA = factorA;
 		this.factorB = factorB;
-		this.result = factorA * factorB;
 	}
 
 	public int getFactorA() {
@@ -29,7 +38,7 @@ public final class Multiplication {
 	
 	@Override
 	public String toString() {
-		return String.format("Multiplication: %d X %d = %d", factorA, factorB, result);
+		return String.format("Multiplication: %d X %d", factorA, factorB);
 	}
 
 	@Override
@@ -38,7 +47,6 @@ public final class Multiplication {
 		int result = 1;
 		result = prime * result + factorA;
 		result = prime * result + factorB;
-		result = prime * result + this.result;
 		return result;
 	}
 
@@ -54,8 +62,6 @@ public final class Multiplication {
 		if (factorA != other.factorA)
 			return false;
 		if (factorB != other.factorB)
-			return false;
-		if (result != other.result)
 			return false;
 		return true;
 	}
