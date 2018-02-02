@@ -65,4 +65,10 @@ public class MultiplicationSolvedEvent implements Serializable {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "Multiplication Attempt ID: " + multiplicationResultAttemptId + ", User ID: " + userId
+				+ ", Correct: " + correct;
+	}
 }

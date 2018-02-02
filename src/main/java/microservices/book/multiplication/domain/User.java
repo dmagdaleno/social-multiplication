@@ -22,6 +22,10 @@ public final class User {
 	public User(final String alias) {
 		this.alias = alias;
 	}
+	
+	public Long getId() {
+		return id;
+	}
 
 	public String getAlias() {
 		return alias;
