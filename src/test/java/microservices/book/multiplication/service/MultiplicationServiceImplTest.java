@@ -2,6 +2,7 @@ package microservices.book.multiplication.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 import java.util.List;
@@ -16,6 +17,8 @@ import org.mockito.MockitoAnnotations;
 import microservices.book.multiplication.domain.Multiplication;
 import microservices.book.multiplication.domain.MultiplicationResultAttempt;
 import microservices.book.multiplication.domain.User;
+import microservices.book.multiplication.event.EventDispatcher;
+import microservices.book.multiplication.event.MultiplicationSolvedEvent;
 import microservices.book.multiplication.repository.MultiplicationRepository;
 import microservices.book.multiplication.repository.MultiplicationResultAttemptRepository;
 import microservices.book.multiplication.repository.UserRepository;
@@ -30,6 +33,8 @@ public class MultiplicationServiceImplTest {
 	private MultiplicationRepository multiplicationRepository;
 	@Mock
 	private MultiplicationResultAttemptRepository attemptRepository;
+	@Mock
+	private EventDispatcher eventDispatcher;
 
 	private MultiplicationService multiplicationService;
 	
@@ -37,7 +42,7 @@ public class MultiplicationServiceImplTest {
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		multiplicationService = new MultiplicationServiceImpl(randomGeneratorService, userRepository,
-				multiplicationRepository, attemptRepository);
+				multiplicationRepository, attemptRepository, eventDispatcher);
 	}
 	
 	@Test
@@ -52,10 +57,12 @@ public class MultiplicationServiceImplTest {
 		
 		// When
 		MultiplicationResultAttempt checkedAttempt = multiplicationService.checkAttempt(attempt);
+		MultiplicationSolvedEvent solvedEvent = new MultiplicationSolvedEvent(checkedAttempt.getId(), checkedAttempt.getUser().getId(), checkedAttempt.isCorrect());
 		
 		// Then
 		assertThat(checkedAttempt.isCorrect()).isTrue();
 		verify(attemptRepository).save(expectedReturn);
+		verify(eventDispatcher).send(eq(solvedEvent));
 	}
 	
 	@Test
