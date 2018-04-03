@@ -73,4 +73,9 @@ public class MultiplicationServiceImpl implements MultiplicationService {
 		return attemptRepository.findTop5ByUserAliasOrderByIdDesc(alias);
 	}
 
+	@Override
+	public MultiplicationResultAttempt getMultiplicationResultAttempt(Long id) {
+		return attemptRepository.findOne(id);
+	}
+
 }

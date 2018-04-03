@@ -29,8 +29,13 @@ public class MultiplicationResultAttemptController {
 	    return ResponseEntity.ok(multiplicationService.checkAttempt(resultAttempt));
 	}
 	
-	@GetMapping("/{alias}")
+	@GetMapping("/from/{alias}")
 	ResponseEntity<List<MultiplicationResultAttempt>> getUserStats(@PathVariable String alias){
 		return ResponseEntity.ok(multiplicationService.getStatsForUser(alias));
+	}
+	
+	@GetMapping("/{id}")
+	ResponseEntity<MultiplicationResultAttempt> getById(@PathVariable("id") Long id){
+		return ResponseEntity.ok(multiplicationService.getMultiplicationResultAttempt(id));
 	}
 }
