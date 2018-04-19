@@ -35,6 +35,10 @@ public final class MultiplicationResultAttempt {
 		this.resultAttempt = resultAttempt;
 		this.correct = correct;
 	}
+	
+	public Long getId() {
+		return id;
+	}
 
 	public User getUser() {
 		return user;

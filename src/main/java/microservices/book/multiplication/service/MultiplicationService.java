@@ -24,10 +24,17 @@ public interface MultiplicationService {
 	
 	
 	/**
-	 * Find last 5 attemps from the user with the alias specified
+	 * Find last 5 attempts from the user with the alias specified
 	 * @param alias
 	 * @return List of attempts from user
 	 */
 	List<MultiplicationResultAttempt> getStatsForUser(String alias);
+	
+	/**
+	 * Find attempt by id
+	 * @param id
+	 * @return attempt {@link MultiplicationResultAttempt}
+	 */
+	MultiplicationResultAttempt getMultiplicationResultAttempt(Long id);
 
 }
